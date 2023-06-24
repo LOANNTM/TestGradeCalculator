@@ -83,6 +83,10 @@ def statistic_for_class():
     # 3.1. Count number of student with high score (>80).
     total_student_of_high_scores = np.count_nonzero(result_list > 80)
     print("Total student of high scores: " + str(total_student_of_high_scores))
+    
+    # 3.2. Mean.
+    mean = np.mean(result_list)
+    print("Mean (average) score: " + str(mean))
 
 # Main function
 def main():
