@@ -92,6 +92,11 @@ def statistic_for_class():
     highest_score = np.max(result_list)
     print("Highest score: " + str(highest_score))
 
+    # 3.4. Lowest score.
+    lowest_score = np.min(result_list)
+    print("Lowest score: " + str(lowest_score))
+    
+
 # Main function
 def main():
 
