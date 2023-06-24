@@ -100,7 +100,11 @@ def statistic_for_class():
     range_of_scores = highest_score - lowest_score
     print("Range of scores: " + str(range_of_scores))
 
-    
+    # 3.6. Median score
+    median_score = np.median(result_list)
+    print("Median score: " + str(median_score))
+
+
 
 
 # Main function
