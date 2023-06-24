@@ -10,6 +10,9 @@ import numpy as np
 answer_key = ['B', 'A', 'D', 'D', 'C', 'B', 'D', 'A', 'C', 'C', 'D', 'B', 'A', 'B', 'A', 'C', 'B', 'D', 'A', 'C', 'A', 'A', 'B', 'D', 'D'] # Use for Task3 this is answer key data
 result_list = np.array([], dtype='i4') # Use for Task3 to store the score of student
 
+question_skip = np.empty(25, dtype='i4') # Use for 3.7
+question_skip.fill(0) # Fill default data by zero [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
 # Task 1
 # 1.2. Write program that allow user to input filename
 def getInput():
@@ -19,7 +22,7 @@ def getInput():
 # Task 2
 def data_analyze(df, file_result):
     global result_list
-    result_list = np.array([], dtype='i4')
+    result_list = np.array([], dtype='i4') #use for 3.1
     
     print("** ANALYZING **")
     total_valid_lines = 0
@@ -65,14 +68,19 @@ def data_analyze(df, file_result):
     # Input is the array with ID and answer_list: ['B', 'A', 'D', 'D', 'C', 'B', 'D', 'A', 'C', 'C', 'D', 'B', 'A', 'B', 'A', 'C', 'B', 'D', 'A', 'C', 'A', 'A', 'B', 'D', 'D']
 def getScore(answer_list):
     global question_skip
+
     score = 0
     for index in range(0, len(answer_list)):
         if answer_list[index] == answer_key[index]: # +4 for correct answer
             score = score + 4
         elif answer_list[index] == "": # 0 in case of empty answer
             score = score + 0
+
+            # Calculate 3.7
+            question_skip[index] = question_skip[index] + 1
         else: # -1 in case of wrong answer
             score = score - 1
+       
 
     return score
 
@@ -104,11 +112,25 @@ def statistic_for_class():
     median_score = np.median(result_list)
     print("Median score: " + str(median_score))
 
+    # 3.7. Question that most people skip
+    # After calculate we have the list of Question that most people skip like [3 2 4 3 4 1 3 0 1 1 3 2 1 1 1 1 2 0 2 3 3 3 4 3 1]
+    
+    most_people_skip= np.max(question_skip)
+    question_that_most_people_skip = ""
+    for index in range(0, len(question_skip)):
+        if question_skip[index] == most_people_skip:
+            if question_that_most_people_skip == "":
+                question_that_most_people_skip = str(index + 1) + " - " + str(most_people_skip) + " - " + str(most_people_skip / len(result_list))
+            else:
+                question_that_most_people_skip = question_that_most_people_skip + ", " + str(index + 1) + " - " + str(most_people_skip) + " - " + str(most_people_skip / len(result_list))
+    print("Question that most people skip: " + question_that_most_people_skip)
+
 
 
 
 # Main function
 def main():
+    global question_skip # use for 3.7
 
     while 1:
         is_file_open = False
@@ -130,6 +152,9 @@ def main():
 
         # If file is opened OK
         if is_file_open == True:
+            question_skip = np.empty(25, dtype='i4') # Use for 3.7
+            question_skip.fill(0) # Fill default data by zero [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] use for 3.7
+            
             data_analyze(df, file_result)
 
              # Task 3:
