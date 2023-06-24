@@ -95,7 +95,13 @@ def statistic_for_class():
     # 3.4. Lowest score.
     lowest_score = np.min(result_list)
     print("Lowest score: " + str(lowest_score))
+
+    # 3.5. Range of scores.
+    range_of_scores = highest_score - lowest_score
+    print("Range of scores: " + str(range_of_scores))
+
     
+
 
 # Main function
 def main():
