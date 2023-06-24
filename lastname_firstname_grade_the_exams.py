@@ -13,6 +13,9 @@ result_list = np.array([], dtype='i4') # Use for Task3 to store the score of stu
 question_skip = np.empty(25, dtype='i4') # Use for 3.7
 question_skip.fill(0) # Fill default data by zero [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
+question_incorrectly = np.empty(25, dtype='i4') # Use for 3.8
+question_incorrectly.fill(0) # Fill default data by zero [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
 # Task 1
 # 1.2. Write program that allow user to input filename
 def getInput():
@@ -57,7 +60,6 @@ def data_analyze(df, file_result):
             print(line_data)
             total_invalid_lines = total_invalid_lines + 1
             
-
     if total_invalid_lines == 0:
         print("No errors found!")
     print("** REPORT **")
@@ -80,7 +82,9 @@ def getScore(answer_list):
             question_skip[index] = question_skip[index] + 1
         else: # -1 in case of wrong answer
             score = score - 1
-       
+
+             # Calculate 3.8
+            question_incorrectly[index] = question_incorrectly[index] + 1
 
     return score
 
@@ -125,12 +129,21 @@ def statistic_for_class():
                 question_that_most_people_skip = question_that_most_people_skip + ", " + str(index + 1) + " - " + str(most_people_skip) + " - " + str(most_people_skip / len(result_list))
     print("Question that most people skip: " + question_that_most_people_skip)
 
-
-
+# 3.8. Question that most people answer incorrectly
+    most_people_answer_incorrectly = np.max(question_incorrectly)
+    question_that_most_people_answer_incorrectly = ""
+    for index in range(0, len(question_incorrectly)):
+        if question_incorrectly[index] == most_people_answer_incorrectly:
+            if question_that_most_people_answer_incorrectly == "":
+                question_that_most_people_answer_incorrectly = str(index + 1) + " - " + str(most_people_answer_incorrectly) + " - " + str(most_people_answer_incorrectly / len(result_list))
+            else:
+                question_that_most_people_answer_incorrectly = question_that_most_people_answer_incorrectly + ", " + str(index + 1) + " - " + str(most_people_answer_incorrectly) + " - " + str(most_people_answer_incorrectly / len(result_list))
+    print("Question that most people answer incorrectly: " + question_that_most_people_answer_incorrectly) 
 
 # Main function
 def main():
     global question_skip # use for 3.7
+    global question_incorrectly # use for 3.8
 
     while 1:
         is_file_open = False
@@ -154,7 +167,10 @@ def main():
         if is_file_open == True:
             question_skip = np.empty(25, dtype='i4') # Use for 3.7
             question_skip.fill(0) # Fill default data by zero [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] use for 3.7
-            
+
+            question_incorrectly = np.empty(25, dtype='i4') # Use for 3.8
+            question_incorrectly.fill(0) # Fill default data by zero [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] use for 3.8
+    
             data_analyze(df, file_result)
 
              # Task 3:
