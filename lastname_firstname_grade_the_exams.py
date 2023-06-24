@@ -51,6 +51,8 @@ def data_analyze(df, file_result):
                     score = getScore(answer_list)
                     result_list = np.append(result_list, score)
 
+                     # Task 4:
+                    print(str(ID) + "," + str(score), file=file_result)
                 else: # In case of none number only A0000027
                     total_invalid_lines = total_invalid_lines + 1
                     print("Invalid line of data: N# is invalid")
@@ -140,6 +142,8 @@ def statistic_for_class():
                 question_that_most_people_answer_incorrectly = question_that_most_people_answer_incorrectly + ", " + str(index + 1) + " - " + str(most_people_answer_incorrectly) + " - " + str(most_people_answer_incorrectly / len(result_list))
     print("Question that most people answer incorrectly: " + question_that_most_people_answer_incorrectly) 
 
+# Task 4 creat file result
+
 # Main function
 def main():
     global question_skip # use for 3.7
@@ -158,6 +162,9 @@ def main():
             # 1.3 In case of open file OK
             print("Successfully opened " + file_name)
 
+            # Task 4:
+            file_result = open(file_name.replace(".", "_grades."), "w")
+
             is_file_open = True
         except: # 1.4 Use try/except
             # 1.3 In case of file cannot open
@@ -175,6 +182,9 @@ def main():
 
              # Task 3:
             statistic_for_class()
+
+             # Task 4:
+            file_result.close()
 
 # Call Main function
 if main() == False:
