@@ -126,9 +126,9 @@ def statistic_for_class():
     for index in range(0, len(question_skip)):
         if question_skip[index] == most_people_skip:
             if question_that_most_people_skip == "":
-                question_that_most_people_skip = str(index + 1) + " - " + str(most_people_skip) + " - " + str(most_people_skip / len(result_list))
+                question_that_most_people_skip = str(index + 1) + " - " + str(most_people_skip) + " - " + "{:.2f}".format(most_people_skip / len(result_list))
             else:
-                question_that_most_people_skip = question_that_most_people_skip + ", " + str(index + 1) + " - " + str(most_people_skip) + " - " + str(most_people_skip / len(result_list))
+                question_that_most_people_skip = question_that_most_people_skip + ", " + str(index + 1) + " - " + str(most_people_skip) + " - " + "{:.2f}".format(most_people_skip / len(result_list))
     print("Question that most people skip: " + question_that_most_people_skip)
 
 # 3.8. Question that most people answer incorrectly
@@ -137,9 +137,11 @@ def statistic_for_class():
     for index in range(0, len(question_incorrectly)):
         if question_incorrectly[index] == most_people_answer_incorrectly:
             if question_that_most_people_answer_incorrectly == "":
-                question_that_most_people_answer_incorrectly = str(index + 1) + " - " + str(most_people_answer_incorrectly) + " - " + str(most_people_answer_incorrectly / len(result_list))
+
+                # 10 - 4 - 0.20, 14 - 4 - 0.20, 16 - 4 - 0.20, 19 - 4 - 0.20, 22 - 4 - 0.20
+                question_that_most_people_answer_incorrectly = str(index + 1) + " - " + str(most_people_answer_incorrectly) + " - " + "{:.2f}".format(round(most_people_answer_incorrectly / len(result_list), 2))
             else:
-                question_that_most_people_answer_incorrectly = question_that_most_people_answer_incorrectly + ", " + str(index + 1) + " - " + str(most_people_answer_incorrectly) + " - " + str(most_people_answer_incorrectly / len(result_list))
+                question_that_most_people_answer_incorrectly = question_that_most_people_answer_incorrectly + ", " + str(index + 1) + " - " + str(most_people_answer_incorrectly) + " - " + "{:.2f}".format(round(most_people_answer_incorrectly / len(result_list), 2))
     print("Question that most people answer incorrectly: " + question_that_most_people_answer_incorrectly) 
 
 # Task 4 creat file result
