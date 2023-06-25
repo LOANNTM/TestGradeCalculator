@@ -1,3 +1,5 @@
+Link repository: https://github.com/LOANNTM/TestGradeCalculator.git
+
 Assignment 02: Calculate and analyze test scores (Test Grade Calculator)
 
 Target item help reduce grading time
